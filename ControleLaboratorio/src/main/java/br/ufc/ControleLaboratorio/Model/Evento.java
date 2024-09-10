@@ -5,11 +5,9 @@ import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
-import javax.persistence.JoinTable;
-import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
+
 
 @Entity
 public class Evento {
@@ -24,13 +22,8 @@ public class Evento {
 	private String hora;
 	@ManyToOne
 	private Professor professor;
-	@ManyToMany
-	@JoinTable(
-		    name = "aluno_evento",
-		    joinColumns = @JoinColumn(name = "evento_id"),
-		    inverseJoinColumns = @JoinColumn(name = "aluno_id")
-		)
-	private List<Aluno> aluno;
+    @OneToMany(mappedBy = "evento")
+    private List<Inscricao> inscricoes;
 	
 	public int getId() {
 		return id;
@@ -75,11 +68,12 @@ public class Evento {
 	public void setProfessor(Professor professor) {
 		this.professor = professor;
 	}
-	public List<Aluno> getAluno() {
-		return aluno;
+	public List<Inscricao> getInscricoes() {
+		return inscricoes;
 	}
-	public void setAluno(List<Aluno> aluno) {
-		this.aluno = aluno;
+	public void setInscricoes(List<Inscricao> inscricoes) {
+		this.inscricoes = inscricoes;
 	}
+
 	
 }

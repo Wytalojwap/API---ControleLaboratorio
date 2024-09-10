@@ -25,7 +25,7 @@ public class AlunoController {
     AlunoRepository alunoRepository;
     
     @GetMapping
-    public List<Aluno> GetAllAluno() {
+    public List<Aluno> GetAllAlunos() {
         return (List<Aluno>) alunoRepository.findAll();
     }
     
@@ -40,7 +40,7 @@ public class AlunoController {
         if (aluno.isPresent()) {
             return ResponseEntity.ok(aluno.get());
         } else {
-            return ResponseEntity.notFound().build();
+        	throw new RuntimeException("Aluno com ID " + id + " não encontrado.");
         }
     }
 
@@ -56,7 +56,7 @@ public class AlunoController {
             alunoRepository.save(aluno);
             return ResponseEntity.ok(aluno);
         } else {
-            return ResponseEntity.notFound().build();
+        	throw new RuntimeException("Aluno com ID " + id + " não encontrado.");
         }
     }
 
@@ -66,7 +66,7 @@ public class AlunoController {
             alunoRepository.deleteById(id);
             return ResponseEntity.noContent().build();
         } else {
-            return ResponseEntity.notFound().build();
+        	throw new RuntimeException("Aluno com ID " + id + " não encontrado.");
         }
     }
 }

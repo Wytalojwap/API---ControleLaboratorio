@@ -5,7 +5,7 @@ import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 
 @Entity
 public class Aluno {
@@ -17,8 +17,8 @@ public class Aluno {
 	private String nome;
 	private String senha;
 	private String email;
-	@ManyToMany(mappedBy = "aluno")
-	private List<Evento> evento;
+	@OneToMany(mappedBy = "aluno")
+    private List<Inscricao> inscricoes;
 	
 	public int getId() {
 		return id;
@@ -44,17 +44,19 @@ public class Aluno {
 	public void setEmail(String email) {
 		this.email = email;
 	}
-	public List<Evento> getEvento() {
-		return evento;
-	}
-	public void setEvento(List<Evento> evento) {
-		this.evento = evento;
-	}
+
 	public String getSenha() {
 		return senha;
 	}
 	public void setSenha(String senha) {
 		this.senha = senha;
 	}
+	public List<Inscricao> getInscricoes() {
+		return inscricoes;
+	}
+	public void setInscricoes(List<Inscricao> inscricoes) {
+		this.inscricoes = inscricoes;
+	}
+	
 	
 }

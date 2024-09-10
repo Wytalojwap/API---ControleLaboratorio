@@ -25,7 +25,7 @@ public class ProfessorController {
     ProfessorRepository professorRepository;
     
     @GetMapping
-    public List<Professor> GetAllProfessor() {
+    public List<Professor> GetAllProfessores() {
         return (List<Professor>) professorRepository.findAll();
     }
     
@@ -40,7 +40,7 @@ public class ProfessorController {
         if (professor.isPresent()) {
             return ResponseEntity.ok(professor.get());
         } else {
-            return ResponseEntity.notFound().build();
+        	throw new RuntimeException("Professor com ID " + id + " não encontrado.");
         }
     }
 
@@ -54,7 +54,7 @@ public class ProfessorController {
             professorRepository.save(professor);
             return ResponseEntity.ok(professor);
         } else {
-            return ResponseEntity.notFound().build();
+        	throw new RuntimeException("Professor com ID " + id + " não encontrado.");
         }
     }
 
@@ -64,7 +64,7 @@ public class ProfessorController {
             professorRepository.deleteById(id);
             return ResponseEntity.noContent().build();
         } else {
-            return ResponseEntity.notFound().build();
+        	throw new RuntimeException("Professor com ID " + id + " não encontrado.");
         }
     }
 }
